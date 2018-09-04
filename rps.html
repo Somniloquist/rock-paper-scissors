@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+        <script>
+            const rps = ["rock", "paper", "scissors"];
+
+            function getRandInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+            function computerPlay() { {}
+                return rps[getRandInt(3)];
+            } 
+
+            function playRound(playerSelection, compSelection) {
+                if(playerSelection === compSelection) {
+                    return "draw";
+                } else if(
+                    playerSelection === "rock" && compSelection === "scissors" ||
+                    playerSelection === "paper" && compSelection === "rock" ||
+                    playerSelection === "scissors" && compSelection === "paper"
+                    ) {
+                    return `You win, ${playerSelection} beats ${compSelection}`;
+                } else {
+                    return `You lose, ${compSelection} beats ${playerSelection}`;
+                }
+            }
+
+            function showResults(draws, wins, loses) {
+                if(draws > wins && draws > loses) {
+                    console.log("Game over, it was a draw.");
+                } else if(wins > loses) {
+                    console.log("You win!");
+                } else {
+                    console.log("You lose.");
+                }
+            }
+
+            function game() {
+                let drawCount = 0;
+                let winCount = 0;
+                let loseCount = 0;
+
+                for (let i = 0; i < 5; i++) {
+                    let playerSelection = prompt("Rock paper or scissors?").toLowerCase();
+                    let compSelection = computerPlay();
+                    result = playRound(playerSelection, compSelection);
+                    console.log(result);
+                    if(result.includes("draw")) {
+                        drawCount++;
+                    } else if(result.includes("win")) {
+                        winCount++;
+                    } else {
+                        loseCount++;
+                    }
+
+
+                }
+
+                showResults(drawCount, winCount, loseCount);
+            }
+
+            game();
+            
+        </script>
+    </body>
+</html>
